@@ -145,11 +145,13 @@ namespace AI_StreamingAI
         {
             //ini untuk testing
             chartXY.Series[0].Points.Clear();
+
+            chartXY.ChartAreas[0].AxisX.CustomLabels.Clear();
             //itu untuk testing
             ErrorCode err = ErrorCode.Success;
 
             err = waveformAiCtrl1.Prepare();
-            m_xInc = 1.0 / waveformAiCtrl1.Conversion.ClockRate;
+            //m_xInc = 1.0 / waveformAiCtrl1.Conversion.ClockRate;
 
             if (err == ErrorCode.Success)
             {
@@ -351,6 +353,8 @@ namespace AI_StreamingAI
 
         private void initChart()
         {
+            Array.Clear(m_dataScaled, 0, m_dataScaled.Length);
+            Console.WriteLine("hehehehehehe");
             chartXY.Series.Clear();
             chartXY.Series.Add("Series 1");
             chartXY.Series.Add("Series 2");
@@ -447,7 +451,7 @@ namespace AI_StreamingAI
             //chartXY.ChartAreas[0].AxisX.CustomLabels.Add(0.5, 1.5, label_chart_2.ToString());
 
             //ini untuk testing
-            Console.WriteLine(max_x_chart);
+            //Console.WriteLine(max_x_chart);
             //itu untuk testing
             //chartXY.ChartAreas[0].AxisX.Interval = max_x_chart / 10;
             //chartXY.ChartAreas[0].AxisX.IntervalType = DateTimeIntervalType.Seconds;
