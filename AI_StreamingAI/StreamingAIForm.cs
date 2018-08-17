@@ -30,7 +30,9 @@ using System.Web.UI.DataVisualization;
 using System.Windows.Forms.DataVisualization;
 using System.Windows.Forms.DataVisualization.Charting;
 using System.Windows.Forms;
+//ini
 using System.Diagnostics;
+//itu
 using Automation.BDaq;
 
 namespace AI_StreamingAI
@@ -62,28 +64,30 @@ namespace AI_StreamingAI
         int             min_y_chart;
         int             ms=0,s,m,h;
         int             zero = 0, ten = 10;
+        //ini
         double          label_chart_1, label_chart_2, label_chart_3, label_chart_4, label_chart_5, label_chart_6;
         double          label_chart_7, label_chart_8, label_chart_9, label_chart_10, label_chart_11;
-        double pos_label_1, pos_label_2, pos_label_3, pos_label_4, pos_label_5, pos_label_6;
-        double pos_label_7, pos_label_8, pos_label_9, pos_label_10, pos_label_11;
-        int batas_chart_1, batas_chart_2, batas_chart_3, batas_chart_4, batas_chart_5, batas_chart_6;
-        int batas_chart_7, batas_chart_8, batas_chart_9, batas_chart_10, batas_chart_11;
-
+        double          pos_label_1, pos_label_2, pos_label_3, pos_label_4, pos_label_5, pos_label_6;
+        double          pos_label_7, pos_label_8, pos_label_9, pos_label_10, pos_label_11;
+        int             batas_chart_1, batas_chart_2, batas_chart_3, batas_chart_4, batas_chart_5, batas_chart_6;
+        int             batas_chart_7, batas_chart_8, batas_chart_9, batas_chart_10, batas_chart_11;
+        //itu
         #endregion
-
+        //ini
         Timer timer = new Timer();
         List<DateTime> TimeList = new List<DateTime>();
 
         Stopwatch watch = new Stopwatch();
-
+        //itu
         public StreamingAIForm()
         {
             InitializeComponent();
+            //ini
             timer.Tick += new EventHandler(timer_tick);
             timer.Interval = 100;
-
+            //itu
         }
-
+        //ini
         void timer_tick(object sender, EventArgs e)
         {
             //DateTime now = DateTime.Now;
@@ -95,7 +99,7 @@ namespace AI_StreamingAI
             labelhr.Text = watch.Elapsed.ToString();
             
         }
-    
+        //itu
         public StreamingAIForm(int deviceNumber)
         {
             InitializeComponent();
@@ -137,7 +141,9 @@ namespace AI_StreamingAI
 
         private void button_start_Click(object sender, EventArgs e)
         {
+            //ini untuk testing
             chartXY.Series[0].Points.Clear();
+            //itu untuk testing
             ErrorCode err = ErrorCode.Success;
 
             err = waveformAiCtrl1.Prepare();
@@ -159,16 +165,17 @@ namespace AI_StreamingAI
             button_stop.Enabled = true;
             
             factor_baca = Convert.ToInt32(textBox1.Text);
-
+            //ini
             max_x_chart = Convert.ToInt32(textBox2.Text) * 61 * 9 + 1;
+            //itu
             min_x_chart = -max_x_chart;
             max_y_chart = Convert.ToInt32(textBox3.Text);
             min_y_chart = -max_y_chart;
-
+            //ini
             timer.Start();
 
             watch.Start();
-
+            //itu
             initChart();
         }
 
@@ -310,10 +317,10 @@ namespace AI_StreamingAI
         {
 	        ErrorCode err = ErrorCode.Success;
 		    err = waveformAiCtrl1.Stop();
-
+            //ini
             timer.Stop();
             watch.Stop();
-
+            //itu
             if (err != ErrorCode.Success)
             {
 			    HandleError(err);
@@ -348,6 +355,7 @@ namespace AI_StreamingAI
             chartXY.Series[0].ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
             chartXY.Series[1].ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
 
+            //ini
             //chartXY.ChartAreas[0].AxisX.Crossing = 0;
             chartXY.ChartAreas[0].AxisY.Crossing = 0;
 
@@ -433,12 +441,12 @@ namespace AI_StreamingAI
             chartXY.ChartAreas[0].AxisX.CustomLabels.Add(pos_label_9- batas_chart_9, pos_label_9+ batas_chart_9, label_chart_9.ToString("F1"), 1, LabelMarkStyle.None);
             chartXY.ChartAreas[0].AxisX.CustomLabels.Add(pos_label_10- batas_chart_10, pos_label_10+ batas_chart_10, label_chart_10.ToString("F1"), 1, LabelMarkStyle.None);
             chartXY.ChartAreas[0].AxisX.CustomLabels.Add(pos_label_11- batas_chart_11, pos_label_11+ batas_chart_11, label_chart_11.ToString("F1"), 1, LabelMarkStyle.None);
-            
+            //itu
             //chartXY.ChartAreas[0].AxisX.CustomLabels.Add(0.5, 1.5, label_chart_2.ToString());
 
-
+            //ini untuk testing
             Console.WriteLine(max_x_chart);
-
+            //itu untuk testing
             //chartXY.ChartAreas[0].AxisX.Interval = max_x_chart / 10;
             //chartXY.ChartAreas[0].AxisX.IntervalType = DateTimeIntervalType.Seconds;
             //chartXY.ChartAreas[0].AxisY.Interval = max_y_chart / 10;
