@@ -62,8 +62,10 @@ namespace AI_StreamingAI
         int             min_x_chart;
         int             max_y_chart;
         int             min_y_chart;
+        //ini untuk testing
         int             ms=0,s,m,h;
         int             zero = 0, ten = 10;
+        //itu untuk testing
         //ini
         double          label_chart_1, label_chart_2, label_chart_3, label_chart_4, label_chart_5, label_chart_6;
         double          label_chart_7, label_chart_8, label_chart_9, label_chart_10, label_chart_11;
