@@ -44,8 +44,8 @@ namespace AI_StreamingAI
         bool            m_isFirstOverRun = true;
         double          m_xInc;
         int             dataCount = 0;
-        double          last_x_0;
-        double          last_x_1;
+        double          last_x = 0;
+        double          last_x_holdX;
         bool            firstChecked = true;
         string[]        arrAvgData;
         string[]        arrData;
@@ -77,7 +77,8 @@ namespace AI_StreamingAI
         #endregion
         //ini
         Timer timer = new Timer();
-        List<DateTime> TimeList = new List<DateTime>();
+        Timer timer_plot = new Timer();
+        //List<DateTime> TimeList = new List<DateTime>();
 
         Stopwatch watch = new Stopwatch();
         //itu
@@ -87,6 +88,9 @@ namespace AI_StreamingAI
             //ini
             timer.Tick += new EventHandler(timer_tick);
             timer.Interval = 100;
+
+            timer_plot.Tick += new EventHandler(plotChart);
+            timer.Interval = 100;
             //itu
         }
         //ini
@@ -94,9 +98,9 @@ namespace AI_StreamingAI
         {
             //DateTime now = DateTime.Now;
             //TimeList.Add(now);
-           
-            chartXY.Series[0].Points.AddY(dataPrint[0]);
-            chartXY.Series[1].Points.AddY(dataPrint[1]);
+
+            
+            
 
             labelhr.Text = watch.Elapsed.ToString();
             
@@ -177,7 +181,7 @@ namespace AI_StreamingAI
             min_y_chart = -max_y_chart;
             //ini
             timer.Start();
-
+            timer_plot.Start();
             watch.Start();
             //itu
             initChart();
@@ -234,9 +238,6 @@ namespace AI_StreamingAI
                         //label3.Text = arrAvgData[2];
                         //Console.WriteLine("i ke " + i + " arrsumdata :" + arrSumData[i]);
                         dataCount++;
-
-                        
-                        
                     }
 
                     dataPrint[0] = Convert.ToDouble(arrAvgData[0]) * factor_baca;
@@ -285,8 +286,10 @@ namespace AI_StreamingAI
 
                     if (checkBox_holdX.Checked && firstChecked)
                     {
-                        last_x_0 = dataPrint[0];
-                        last_x_1 = dataPrint[1];
+                        last_x_holdX = last_x;
+
+                        //last_x_0 = dataPrint[0];
+                        //last_x_1 = dataPrint[1];
                         //last_x = dataCount.ToString();
                         firstChecked = false;
                     }
@@ -313,6 +316,8 @@ namespace AI_StreamingAI
                 return;
             }
 
+            timer_plot.Stop();
+
             button_start.Enabled = true;
             button_pause.Enabled = false;
         }
@@ -323,6 +328,7 @@ namespace AI_StreamingAI
 		    err = waveformAiCtrl1.Stop();
             //ini
             timer.Stop();
+            timer_plot.Stop();
             watch.Stop();
             //itu
             if (err != ErrorCode.Success)
@@ -486,10 +492,39 @@ namespace AI_StreamingAI
         }
         #endregion
 
-        private void plotChart(string[] data)
+        private void plotChart(object sender, EventArgs e)
         {
+            if (checkBox_holdX.Checked)
+            {
+                if (checkBox1.Checked)
+                {
+                    chartXY.Series[0].Points.AddXY(last_x, dataPrint[0]);
+                }
+
+                if (checkBox2.Checked)
+                {
+                    chartXY.Series[1].Points.AddXY(last_x, dataPrint[1]);
+                }
+                
+            }
+
+            if (!checkBox_holdX.Checked)
+            {
+                last_x += 1;
+                if (checkBox1.Checked)
+                {
+                    chartXY.Series[0].Points.AddXY(last_x, dataPrint[0]);
+                }
+
+                if (checkBox2.Checked)
+                {
+                    chartXY.Series[1].Points.AddXY(last_x, dataPrint[1]);
+                }
+                firstChecked = true;
+            }
             
 
+            /*
             if (checkBox3.Checked)
             {
                 dataPrint[0] = -(Convert.ToDouble(arrAvgData[0]));
@@ -530,6 +565,7 @@ namespace AI_StreamingAI
                     chartXY.Series[1].Points.AddXY(last_x_1, dataPrint[2]);
                 }
             }
+            */
         }
 
         private void label15_Click(object sender, EventArgs e)

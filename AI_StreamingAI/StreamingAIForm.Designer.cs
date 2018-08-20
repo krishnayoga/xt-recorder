@@ -267,6 +267,8 @@ namespace AI_StreamingAI
             // checkBox1
             // 
             this.checkBox1.AutoSize = true;
+            this.checkBox1.Checked = true;
+            this.checkBox1.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkBox1.Location = new System.Drawing.Point(645, 50);
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.Size = new System.Drawing.Size(104, 22);
@@ -321,6 +323,7 @@ namespace AI_StreamingAI
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(100, 24);
             this.textBox1.TabIndex = 41;
+            this.textBox1.Text = "1";
             // 
             // label13
             // 
@@ -337,6 +340,7 @@ namespace AI_StreamingAI
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(100, 24);
             this.textBox2.TabIndex = 43;
+            this.textBox2.Text = "10";
             // 
             // textBox3
             // 
@@ -344,6 +348,7 @@ namespace AI_StreamingAI
             this.textBox3.Name = "textBox3";
             this.textBox3.Size = new System.Drawing.Size(100, 24);
             this.textBox3.TabIndex = 44;
+            this.textBox3.Text = "10";
             // 
             // labelhr
             // 
